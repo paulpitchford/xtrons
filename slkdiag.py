@@ -75,6 +75,7 @@ CODE_HINTS = {
 DEFAULT_STATUS_MASK = 0x0D  # test failed now | pending | confirmed
 SCAN_TIMEOUT_MS = 200
 SWEEP_TIMEOUT_MS = 100
+SWEEP_FLOOD_SECONDS = 3.0  # a sweep reply still arriving after this long is a flood
 READ_TIMEOUT_MS = 400
 SLOW_UNIT_TIMEOUT_MS = 1020  # the longest wait the adapter supports
 
@@ -163,6 +164,7 @@ def parse_frame_line(line: str) -> tuple[int, bytes] | None:
 class Reply:
     frames: list[tuple[int, bytes]]
     notes: list[str]  # adapter messages such as NO DATA or CAN ERROR
+    cut_short: bool = False  # the adapter was still receiving when we stopped waiting
 
     @classmethod
     def parse(cls, lines: list[str]) -> "Reply":
@@ -180,6 +182,13 @@ class Reply:
 
     def ids(self) -> list[int]:
         return list(dict.fromkeys(sender for sender, _ in self.frames))
+
+    def loudest(self) -> int | None:
+        """The address that sent the most frames, or None if nothing was heard."""
+        counts: dict[int, int] = {}
+        for sender, _ in self.frames:
+            counts[sender] = counts.get(sender, 0) + 1
+        return max(counts, key=counts.__getitem__) if counts else None
 
 
 @dataclass
@@ -261,16 +270,34 @@ class Elm:
             buffer += chunk
         return bytes(buffer), True
 
-    def command(self, text: str, timeout: float = 6.0, tolerate_timeout: bool = False) -> list[str]:
+    def exchange(self, text: str, timeout: float) -> tuple[list[str], bool]:
+        """Send one line and collect the reply; the flag says whether the prompt came back."""
         self._note(">>", text)
         self.sock.sendall(text.encode("ascii") + b"\r")
         raw, prompted = self._read_until_prompt(timeout)
         lines = clean_lines(raw, echo=text)
         for line in lines:
             self._note("<<", line)
+        return lines, prompted
+
+    def command(self, text: str, timeout: float = 6.0, tolerate_timeout: bool = False) -> list[str]:
+        lines, prompted = self.exchange(text, timeout)
         if not prompted and not tolerate_timeout:
             raise ElmError(f"The adapter did not reply to {text} within {timeout:.0f}s.")
         return lines
+
+    def interrupt(self) -> None:
+        """Stop a reception the adapter is still busy with, and drain what it sent meanwhile."""
+        self._note(">>", "(any character, to stop receiving)")
+        self.sock.sendall(b" ")
+        tail, _ = self._read_until_prompt(3.0)
+        lines = clean_lines(tail, echo="")
+        frames = sum(1 for line in lines if parse_frame_line(line))
+        if frames:
+            self._note("<<", f"({frames} more frames discarded)")
+        for line in lines:
+            if not parse_frame_line(line):
+                self._note("<<", line)
 
     def at(self, command: str) -> list[str]:
         return self.command("AT" + command)
@@ -357,9 +384,17 @@ class Elm:
         self.set_request(request_id)
         self.listen_to(response_id)
 
-    def request(self, payload: bytes) -> Reply:
+    def request(self, payload: bytes, timeout: float = 6.0, tolerate_timeout: bool = False) -> Reply:
+        """Send a request to the car. A reply that never reaches the prompt raises, unless
+        tolerated, in which case it comes back marked cut_short with whatever was heard."""
         ensure_read_only(payload)
-        return Reply.parse(self.command(payload.hex().upper()))
+        text = payload.hex().upper()
+        lines, prompted = self.exchange(text, timeout)
+        if not prompted and not tolerate_timeout:
+            raise ElmError(f"The adapter did not reply to {text} within {timeout:.0f}s.")
+        reply = Reply.parse(lines)
+        reply.cut_short = not prompted
+        return reply
 
     def ask(self, response_id: int, payload: bytes) -> Answer:
         """Send one request to the selected unit and classify its answer."""
@@ -553,12 +588,41 @@ def sweep(elm: Elm, skip: set[int], ignore_senders: set[int], mask: int, say) ->
         return []
     found: list[Unit] = []
     elm.set_timeout(SWEEP_TIMEOUT_MS)
+    hearing = (0x400, 0x400)  # everything from 400 to 7FF
+
+    def ask_everyone(request_id: int) -> Reply | None:
+        """Send tester-present while hearing the whole range. A unit that transmits without
+        pause keeps the adapter receiving forever; it is then ignored and the sweep goes on
+        hearing only the half of the range it is not in. Returns None once that fails too."""
+        nonlocal hearing
+        elm.set_request(request_id)
+        elm.listen_to_range(*hearing)
+        reply = elm.request(b"\x3e\x00", timeout=SWEEP_FLOOD_SECONDS, tolerate_timeout=True)
+        if not reply.cut_short:
+            return reply
+        elm.interrupt()
+        loud = reply.loudest()
+        if loud is None or hearing[1] != 0x400:
+            say("  The sweep was stopped: the adapter kept being flooded with traffic.")
+            return None
+        hearing = (0x600 if loud < 0x600 else 0x400, 0x600)
+        low, high = hearing[0], hearing[0] + 0x1FF
+        say(f"  {loud:03X} transmits without pause; ignoring it and hearing only {low:03X}-{high:03X}")
+        ignore_senders.add(loud)
+        elm.listen_to_range(*hearing)
+        reply = elm.request(b"\x3e\x00", timeout=SWEEP_FLOOD_SECONDS, tolerate_timeout=True)
+        if reply.cut_short:
+            elm.interrupt()
+            say("  The sweep was stopped: the adapter kept being flooded with traffic.")
+            return None
+        return reply
+
     for request_id in range(0x600, 0x800):
         if request_id in skip:
             continue
-        elm.set_request(request_id)
-        elm.listen_to_range(0x400, 0x400)  # everything from 400 to 7FF
-        reply = elm.request(b"\x3e\x00")
+        reply = ask_everyone(request_id)
+        if reply is None:
+            break
         senders = [s for s in reply.ids() if s not in ignore_senders and s != request_id]
         if len(senders) == 1:
             answer = probe(elm, request_id, senders[0], mask)

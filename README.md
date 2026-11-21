@@ -6,7 +6,7 @@ Reads fault codes from a Mercedes' control units through an XTRONS (ELM327) Blue
 
 Generic OBD apps only reach the engine. `slkdiag.py` also asks the other units (climate control, ignition switch, body modules) on Mercedes' own diagnostic addresses.
 
-**Status:** tested only against the simulated adapter in `tests/`, on Linux. It has not yet been run against the real adapter, the car, or a Mac.
+**Status:** run against a 2016 SLK 250 CDI from a Mac through an XTRONS adapter on 21 November 2026; it found 13 control units and read their fault codes. Also tested against the simulated adapter in `tests/`.
 
 It needs Python 3.9 or newer and nothing else.
 
@@ -37,7 +37,7 @@ Plug the adapter into the OBD port and turn the ignition on (key position 2). Th
    python3 slkdiag.py --port /dev/cu.OBDII
    ```
 
-If it connected once and will not connect again after the adapter was unplugged, remove the adapter in Bluetooth settings and pair it again.
+The adapter only answers on the first time the port is opened after pairing. Before every further run, remove OBDII in Bluetooth settings and pair it again, then run the tool straight away. Opening the port with anything else first (a terminal, a test script) uses up that one chance.
 
 ### On Linux
 
@@ -60,7 +60,7 @@ If it connected once and will not connect again after the adapter was unplugged,
 
 ### If no climate unit shows up
 
-Add `--wide` to try every remaining address (a minute or two longer):
+Add `--wide` to try every remaining address (a minute or two longer). While it listens to the whole range, a unit that transmits without pause can swamp the adapter; the sweep then names that address, ignores it, and carries on hearing only the half of the range it is not in.
 
 ```
 python3 slkdiag.py --port /dev/cu.OBDII --wide

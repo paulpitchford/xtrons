@@ -90,6 +90,20 @@ class FullSessionTests(unittest.TestCase):
         self.assertEqual((found["response_id"], found["found_by"]), (0x4E8, "sweep"))
         self.assertEqual(found["identity"]["hardware part number"], "1729012200")
 
+    def test_wide_sweep_survives_a_unit_that_transmits_without_pause(self):
+        result, adapter, printed = run(
+            options=slkdiag.Options(wide=True, listen_seconds=0.2),
+            non_stop=(0x75E, bytes.fromhex("04 81 00 2D 18")),
+        )
+
+        self.assertTrue(any("75E transmits without pause" in line for line in printed))
+        self.assertIsNone(unit_at(result, 0x75E))
+        self.assertNotIn(0x75E, [unit["response_id"] for unit in result["units"]])
+        found = unit_at(result, 0x743)  # still found: its reply is in the half kept
+        self.assertEqual((found["response_id"], found["found_by"]), (0x4E8, "sweep"))
+        self.assertEqual(len(unit_at(result, 0x672)["faults"]), 3)
+        self.assertTrue(any(0x7F0 <= header for header, _ in adapter.sent))  # swept to the end
+
     def test_addresses_already_in_use_on_the_bus_are_never_transmitted_on(self):
         result, adapter, _ = run(background=("612 00 11 22 33 44 55 66 77", "3F1 01 02"))
 

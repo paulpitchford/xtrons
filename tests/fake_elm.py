@@ -46,6 +46,7 @@ class FakeElm(threading.Thread):
         flow_control: bool = True,
         background: tuple[str, ...] = (),
         version: str = "ELM327 v1.5",
+        non_stop: tuple[int, bytes] | None = None,
     ):
         super().__init__(daemon=True)
         self.units = units
@@ -54,6 +55,9 @@ class FakeElm(threading.Thread):
         self.supports_flow_control = flow_control
         self.background = background
         self.version = version
+        # (address, frame) of a unit that transmits all the time. The adapter only notices it
+        # while its filter lets the address through, and then never stops receiving.
+        self.non_stop = non_stop
         self.sent: list[tuple[int, bytes]] = []  # every request put on the bus
         self._server = socket.create_server(("127.0.0.1", 0))
         self.port = self._server.getsockname()[1]
@@ -208,6 +212,9 @@ class FakeElm(threading.Thread):
                     for frame in frames
                     if self._passes(unit.response_id)
                 ]
+        if self.non_stop and self._passes(self.non_stop[0]):
+            self.monitoring = True  # the stream only ends when a character arrives
+            return lines + [self._format(*self.non_stop)] * 300
         return lines or ["NO DATA"]
 
     def _flow_control_reaches(self, request_id: int, unit: FakeUnit) -> bool:
