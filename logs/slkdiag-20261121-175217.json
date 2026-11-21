@@ -1,0 +1,192 @@
+{
+  "units": [
+    {
+      "request_id": 2016,
+      "response_id": 2024,
+      "found_by": "standard",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "6519011902"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 2017,
+      "response_id": 2025,
+      "found_by": "standard",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "0009014900"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 2020,
+      "response_id": 2028,
+      "found_by": "standard",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "0009019603"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1538,
+      "response_id": 1152,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "2129014007"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1554,
+      "response_id": 1154,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "2189054701"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1570,
+      "response_id": 1156,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "1729013000"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1586,
+      "response_id": 1158,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "1729014000"
+      },
+      "faults": [
+        {
+          "code": "596900",
+          "label": "C1969-00",
+          "state": "stored",
+          "status": 104,
+          "hint": ""
+        }
+      ],
+      "faults_held": 1,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1602,
+      "response_id": 1160,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "0009017803"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1618,
+      "response_id": 1162,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 03 7F 3E 12",
+      "protocol": "UDS",
+      "identity": {},
+      "faults": [],
+      "faults_held": null,
+      "fault_note": "fault codes not readable: refused (service not supported, code 11)"
+    },
+    {
+      "request_id": 1714,
+      "response_id": 1174,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 03 7F 3E 12",
+      "protocol": "KWP2000",
+      "identity": {},
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1730,
+      "response_id": 1176,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "1729013702"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1842,
+      "response_id": 1190,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "2469017905"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1938,
+      "response_id": 1202,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "0375456032"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    }
+  ],
+  "notes": [],
+  "adapter": {
+    "version": "ELM327 v1.5",
+    "device": "OBDII to RS232 Interpreter",
+    "battery": "11.5V"
+  },
+  "capabilities": {
+    "receive_address": true,
+    "filter_mask": true,
+    "flow_control": true,
+    "timeout": true,
+    "raw_monitor": true
+  },
+  "engine_answered": true,
+  "background_addresses": []
+}

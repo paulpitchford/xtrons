@@ -1,0 +1,16 @@
+{
+  "units": [],
+  "notes": [],
+  "adapter": {
+    "version": "ELM327 v1.5",
+    "device": "OBDII to RS232 Interpreter",
+    "battery": "11.8V"
+  },
+  "capabilities": {
+    "receive_address": true,
+    "filter_mask": true,
+    "flow_control": true,
+    "timeout": true,
+    "raw_monitor": true
+  }
+}

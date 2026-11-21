@@ -1,0 +1,388 @@
+{
+  "units": [
+    {
+      "request_id": 2016,
+      "response_id": 2024,
+      "found_by": "standard",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "6519011902"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 2017,
+      "response_id": 2025,
+      "found_by": "standard",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "0009014900"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 2020,
+      "response_id": 2028,
+      "found_by": "standard",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "0009019603"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1538,
+      "response_id": 1152,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "2129014007"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1554,
+      "response_id": 1154,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "2189054701"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1570,
+      "response_id": 1156,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "1729013000"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1586,
+      "response_id": 1158,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "1729014000"
+      },
+      "faults": [
+        {
+          "code": "596900",
+          "label": "C1969-00",
+          "state": "stored",
+          "status": 104,
+          "hint": ""
+        }
+      ],
+      "faults_held": 1,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1602,
+      "response_id": 1160,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "0009017803"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1618,
+      "response_id": 1162,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 03 7F 3E 12",
+      "protocol": "UDS",
+      "identity": {},
+      "faults": [],
+      "faults_held": null,
+      "fault_note": "fault codes not readable: refused (service not supported, code 11)"
+    },
+    {
+      "request_id": 1714,
+      "response_id": 1174,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 03 7F 3E 12",
+      "protocol": "KWP2000",
+      "identity": {},
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1730,
+      "response_id": 1176,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "1729013702"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1842,
+      "response_id": 1190,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "2469017905"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1938,
+      "response_id": 1202,
+      "found_by": "mercedes",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "0375456032"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1546,
+      "response_id": 1153,
+      "found_by": "sweep",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "1729013005"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1610,
+      "response_id": 1161,
+      "found_by": "sweep",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "1729015704"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1699,
+      "response_id": 1236,
+      "found_by": "sweep",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "1729019502"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1722,
+      "response_id": 1175,
+      "found_by": "sweep",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "1729013602"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1779,
+      "response_id": 1246,
+      "found_by": "sweep",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "2129014507"
+      },
+      "faults": [
+        {
+          "code": "C01988",
+          "label": "U0019-88",
+          "state": "stored",
+          "status": 40,
+          "hint": ""
+        }
+      ],
+      "faults_held": 1,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1786,
+      "response_id": 1183,
+      "found_by": "sweep",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "0009014000"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1787,
+      "response_id": 1247,
+      "found_by": "sweep",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "1729015500"
+      },
+      "faults": [
+        {
+          "code": "D14000",
+          "label": "U1140-00",
+          "state": "stored",
+          "status": 40,
+          "hint": ""
+        },
+        {
+          "code": "D16900",
+          "label": "U1169-00",
+          "state": "stored",
+          "status": 40,
+          "hint": ""
+        }
+      ],
+      "faults_held": 2,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1795,
+      "response_id": 1248,
+      "found_by": "sweep",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "2129019108"
+      },
+      "faults": [
+        {
+          "code": "98B113",
+          "label": "B18B1-13",
+          "state": "stored",
+          "status": 40,
+          "hint": ""
+        }
+      ],
+      "faults_held": 1,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1803,
+      "response_id": 1249,
+      "found_by": "sweep",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "2129019208"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1835,
+      "response_id": 1253,
+      "found_by": "sweep",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "1728201526"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1859,
+      "response_id": 1256,
+      "found_by": "sweep",
+      "probe": "3E 00 -> 02 7E 00",
+      "protocol": "UDS",
+      "identity": {
+        "hardware part number": "1728701158"
+      },
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1875,
+      "response_id": 1258,
+      "found_by": "sweep",
+      "probe": "3E 00 -> 03 7F 3E 12",
+      "protocol": "KWP2000",
+      "identity": {},
+      "faults": [],
+      "faults_held": 0,
+      "fault_note": ""
+    },
+    {
+      "request_id": 1994,
+      "response_id": 1209,
+      "found_by": "sweep",
+      "probe": "3E 00 -> 03 7F 3E 11",
+      "protocol": "UDS",
+      "identity": {},
+      "faults": [],
+      "faults_held": null,
+      "fault_note": "fault codes not readable: refused (service not supported, code 11)"
+    }
+  ],
+  "notes": [],
+  "adapter": {
+    "version": "ELM327 v1.5",
+    "device": "OBDII to RS232 Interpreter",
+    "battery": "11.4V"
+  },
+  "capabilities": {
+    "receive_address": true,
+    "filter_mask": true,
+    "flow_control": true,
+    "timeout": true,
+    "raw_monitor": true
+  },
+  "engine_answered": true,
+  "background_addresses": []
+}
