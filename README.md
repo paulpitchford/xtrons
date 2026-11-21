@@ -19,7 +19,7 @@ Plug the adapter into the OBD port and turn the ignition on (key position 2). Th
 1. Get the code and check Python is there (macOS offers to install it the first time):
 
    ```
-   git clone https://github.com/paulpitchford-claude/xtrons.git
+   git clone https://github.com/paulpitchford/xtrons.git
    cd xtrons
    python3 --version
    ```
